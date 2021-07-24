@@ -30,7 +30,7 @@ permalink_defaults:
 # RSS:
 weibo_username: 
 zhihu_username: pigeon1021
-github_username: Xpigeon
+github_username: GaoGe21
 twitter_username: 
 facebook_username:  
 linkedin_username: 
@@ -142,7 +142,7 @@ theme: Anisina
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/Xpigeon/xpigeon.github.io
+  repo: https://github.com/GaoGe21/xpigeon.github.io
   branch: 
 
 
