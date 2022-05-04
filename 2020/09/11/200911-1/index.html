@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / 学习ES6：Proxy代理｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2020/09/11/200911-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2020/09/14/wDfgYR.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2020/09/14/wDfgYR.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / 学习ES6：Proxy代理</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2020-09-11
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#ES6"
+                           title="ES6">ES6</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / 学习ES6：Proxy代理
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>Proxy代理：由Proxy来代理某些操作。在访问目标对象时，拦截住访问并进行一系列修改的设置（用自己的定义覆盖语言的原始定义）</p>
+<p>通过new的形式，可以创建一个proxy实例对象，写法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let proxy &#x3D; new Proxy(target, handler);</span><br></pre></td></tr></table></figure>
+<p>target参数：所要代理的的目标对象<br>handler参数：用来定制拦截行为的一个对象</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let proxy &#x3D; new Proxy(&#123;&#125;, &#123;</span><br><span class="line">  get: function(target, propKey) &#123;</span><br><span class="line">    return 35;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">let obj &#x3D; Object.create(proxy);</span><br><span class="line">obj.time &#x2F;&#x2F; 35</span><br></pre></td></tr></table></figure>
+<p>上面栗子中，通过new创建出实例对象proxy，第一个参数是一个空对象（想要拦截这个空对象的访问），第二个参数是一个对象，在其内部重写get方法。</p>
+<p>proxy作为obj对象的原型对象，当访问obj对象查找它的time属性时，obj上没有，就去它的原型对象proxy上找，调用重写的get方法得到返回值35</p>
+<p>proxy支持多个拦截器操作，下面具体介绍：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const person &#x3D; &#123;</span><br><span class="line">  name: &quot;ss&quot;,</span><br><span class="line">  _ID: &quot;0000-0000&quot;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">let proxy &#x3D; new Proxy(person, &#123;</span><br><span class="line">  get: function(target, propKey) &#123;</span><br><span class="line">    if (propKey in target) &#123;</span><br><span class="line">      return target[propKey];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      throw new ReferenceError(&#96;$&#123;propKey&#125; does not exist.&#96;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  set: function(obj, prop, value) &#123;</span><br><span class="line">    if (prop &#x3D;&#x3D;&#x3D; &#39;age&#39; &amp;&amp; !Number.isInteger(value)) &#123;</span><br><span class="line">        throw new TypeError(&#39;The age is not an integer&#39;);</span><br><span class="line">    &#125;</span><br><span class="line">    obj[prop] &#x3D; value; &#x2F;&#x2F; 满足条件直接保存</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  has (target, key) &#123;</span><br><span class="line">    if (key[0] &#x3D;&#x3D;&#x3D; &#39;_&#39;) &#123;</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line">    return key in target;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  construct: function(target, args) &#123;</span><br><span class="line">    return &#123; value: args[0] * 10 &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  deleteProperty (target, key) &#123;</span><br><span class="line">    if (key[0] &#x3D;&#x3D;&#x3D; &#39;_&#39;) &#123;</span><br><span class="line">    throw new Error(&#96;private property cannot be deleted&#96;);</span><br><span class="line">  &#125;</span><br><span class="line">    delete target[key];</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; get</span><br><span class="line">proxy.name &#x2F;&#x2F; &quot;ss&quot;</span><br><span class="line">proxy.sex &#x2F;&#x2F; throw Error. （如果不设拦截，此处会返回undefined）</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; set</span><br><span class="line">proxy.age &#x3D; 100;</span><br><span class="line">proxy.age &#x3D; &quot;aa&quot;; &#x2F;&#x2F; throw Error.</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; has</span><br><span class="line">&#39;_ID&#39; in proxy &#x2F;&#x2F; false</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; construct</span><br><span class="line">(new p(1)).value &#x2F;&#x2F; 10</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; deleteProperty</span><br><span class="line">delete proxy._prop &#x2F;&#x2F; throw Error.</span><br></pre></td></tr></table></figure>
+<h2 id="1-get（）"><a href="#1-get（）" class="headerlink" title="1. get（）"></a>1. get（）</h2><p>get(target, propKey, receiver)</p>
+<p>target： 目标对象<br>propKey：属性名<br>receiver：receiver指向 -&gt; 读取这个属性或方法的那个对象（可选）</p>
+<h2 id="2-set（）"><a href="#2-set（）" class="headerlink" title="2. set（）"></a>2. set（）</h2><p>set(target, propKey, value, receiver)</p>
+<p>target： 目标对象<br>propKey：属性名<br>value：设置的值<br>receiver：receiver指向 -&gt; 读取这个属性或方法的那个对象（一般是proxy实例本身，可选）</p>
+<p><strong>注意：对象设置不可写（writable: false）、不可配置（ configurable: false）时，get/set 代理不生效！</strong></p>
+<h2 id="3-has（）"><a href="#3-has（）" class="headerlink" title="3. has（）"></a>3. has（）</h2><p>has(target, propKey)：拦截propKey <strong>in</strong> proxy的操作，返回布尔值</p>
+<p>target：目标对象<br>propKey：查询的属性名</p>
+<p><strong>注意：has方法拦截的是HasProperty操作，不是HasOwnProperty操作。即has不判断属性是对象自身的属性，还是继承来的。</strong></p>
+<h2 id="4-construct（）"><a href="#4-construct（）" class="headerlink" title="4. construct（）"></a>4. construct（）</h2><p>construct(target, args)：拦截new操作</p>
+<p>target：目标对象<br>args：构造函数的参数对象<br>newTarget：创造实例对象时new作用的构造函数</p>
+<h2 id="5-deleteProperty（）"><a href="#5-deleteProperty（）" class="headerlink" title="5. deleteProperty（）"></a>5. deleteProperty（）</h2><p>deleteProperty(target, propKey)：拦截delete proxy[propKey]的操作，返回布尔值（返回false属性无法删除）。</p>
+<p>target：目标对象<br>propKey：删除的属性名</p>
+<h2 id="6-apply（）"><a href="#6-apply（）" class="headerlink" title="6. apply（）"></a>6. apply（）</h2><p>apply(target, object, args) ：函数调用，执行call，执行apply时拦截</p>
+<p>target：目标对象<br>object：目标对象的上下文对象<br>args：参数数组</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let proxy &#x3D; new Proxy((left, right) &#x3D;&gt; left + right, &#123;</span><br><span class="line">	apply (target, ctx, args) &#123;</span><br><span class="line">	    return Reflect.apply(...arguments) * 2;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">proxy(1, 2) &#x2F;&#x2F; 6</span><br><span class="line">proxy.call(null, 5, 6) &#x2F;&#x2F; 22</span><br><span class="line">proxy.apply(null, [7, 8]) &#x2F;&#x2F; 30</span><br></pre></td></tr></table></figure>
+<h2 id="7-defineProperty（）"><a href="#7-defineProperty（）" class="headerlink" title="7. defineProperty（）"></a>7. defineProperty（）</h2><p>defineProperty(target, propKey, propDesc)：拦截Object.defineProperty，返回布尔值。</p>
+<h2 id="8-getOwnPropertyDescriptor（）"><a href="#8-getOwnPropertyDescriptor（）" class="headerlink" title="8. getOwnPropertyDescriptor（）"></a>8. getOwnPropertyDescriptor（）</h2><p>getOwnPropertyDescriptor(target, propKey)：拦截Object.getOwnPropertyDescriptor，返回属性的描述对象。</p>
+<h2 id="9-getPrototypeOf（）"><a href="#9-getPrototypeOf（）" class="headerlink" title="9. getPrototypeOf（）"></a>9. getPrototypeOf（）</h2><p>getPrototypeOf(target)：拦截Object.getPrototypeOf(proxy)，返回一个对象。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/20/200920-1/" data-toggle="tooltip" data-placement="top"
+                           title="photo / 杭州">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/08/27/200827-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / 二叉树">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-get%EF%BC%88%EF%BC%89"><span class="toc-text">1. get（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-set%EF%BC%88%EF%BC%89"><span class="toc-text">2. set（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-has%EF%BC%88%EF%BC%89"><span class="toc-text">3. has（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-construct%EF%BC%88%EF%BC%89"><span class="toc-text">4. construct（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-deleteProperty%EF%BC%88%EF%BC%89"><span class="toc-text">5. deleteProperty（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-apply%EF%BC%88%EF%BC%89"><span class="toc-text">6. apply（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-defineProperty%EF%BC%88%EF%BC%89"><span class="toc-text">7. defineProperty（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-getOwnPropertyDescriptor%EF%BC%88%EF%BC%89"><span class="toc-text">8. getOwnPropertyDescriptor（）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-getPrototypeOf%EF%BC%88%EF%BC%89"><span class="toc-text">9. getPrototypeOf（）</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / fetch API｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2020/05/02/200502-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OElsfg.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OElsfg.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / fetch API</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2020-05-02
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#网络安全"
+                           title="网络安全">网络安全</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / fetch API
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>全局 fetch 函数是 web 请求和处理响应的简单方式，XMLHttpRequest的使用相对比较复杂。但fetch存在一些兼容性问题，例如IE8以下不支持，需要使用Fetch Polyfill 为不支持的浏览器重新创建功能。</p>
+<p>对于传统的XMLHttpRequest而言，必须使用它的一个实例来执行请求和检索返回的响应。 但是通过Fetch API 能够明确的配置请求对象。</p>
+<p>fetch请求会接受两个参数，返回一个promise对象。下面是一个简单的栗子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const path: string = <span class="string">&quot;https://cn.bing.com/&quot;</span></span><br><span class="line">const options = &#123; </span><br><span class="line">        method: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">    headers: new Headers(),</span><br><span class="line">    mode: <span class="string">&#x27;cors&#x27;</span>,</span><br><span class="line">    credentials: <span class="string">&#x27;include&#x27;</span> //支持跨域调用</span><br><span class="line">    // POST请求时，提供要提交的表单信息 body: JSON.Stringify(&#123;name:a&#125;) </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">fetch(path, options).then(response =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(response.ok) &#123;</span><br><span class="line">                <span class="keyword">return</span> response.json();</span><br><span class="line">        &#125;</span><br><span class="line">        throw new Error(<span class="string">&#x27;Network response not ok.&#x27;</span>);</span><br><span class="line">&#125;).catch(error =&gt; &#123;</span><br><span class="line">        console.error(<span class="string">&#x27;Error:&#x27;</span>, error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Headers</strong></p>
+<p>可以通过has/get进行查询和获取</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const content: string = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line">myHeaders = new Headers(&#123;</span><br><span class="line">        <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/plain&quot;</span>,</span><br><span class="line">        <span class="string">&quot;Content-Length&quot;</span>: content.length.toString(),</span><br><span class="line">        <span class="string">&quot;X-Custom-Header&quot;</span>: <span class="string">&quot;ProcessThisImmediately&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">myHeaders.has(<span class="string">&quot;Content-Type&quot;</span>) // true</span><br><span class="line">myHeaders.has(<span class="string">&quot;Content-Length&quot;</span>) // <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p><strong>Response对象</strong><br>当fetch() promise被解析时，Response实例被返回，以下是控制台打出的一个Response对象 。</p>
+<p><img src="/2020/05/02/200502-1/01.jpg"></p>
+<p>有图可见，response对象上有一些属性Response.status，Response.statusText，Response.ok等</p>
+<p>Response对象还有一些其他的方法：</p>
+<ol>
+<li>Response.clone()：创建一个Response对象的克隆</li>
+<li>Response.error()： 返回一个绑定了网络错误的新的Response对象</li>
+<li>Response.blob()：返回一个被解析为Blob格式的promise对象，并且将它设置为已读（只能被读取一次）</li>
+<li>Response.formData()：返回一个被解析为FormData格式的promise对象</li>
+<li>Response.json()：返回一个被解析为JSON格式的promise对象</li>
+<li>Response.text()：返回一个被解析为USVString格式的promise对象</li>
+</ol>
+<p><strong>目前Fetch还没有提供取消请求的方法</strong></p>
+<hr>
+<p>更新：<br> 目前fetch提供了一种通过 <strong>AbortController</strong>构造函数创建出实例对象，在实例对象上包含一个标识 <strong>signal</strong>,将这个标识放入fetch的第二个参数 <strong>options</strong>中，就可以通过实例对象上的abort()方法来中断请求。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const controller: AbortController = new AbortController();</span><br><span class="line">const signal: AbortSignal = controller.singal;</span><br><span class="line">const options = &#123; </span><br><span class="line">    method: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">    headers: new Headers(),</span><br><span class="line">    mode: <span class="string">&#x27;cors&#x27;</span>,</span><br><span class="line">    signal,</span><br><span class="line">    credentials: <span class="string">&#x27;include&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"> fetch(path, options).then(...);</span><br><span class="line"></span><br><span class="line"> controller.abort(); //中断请求</span><br></pre></td></tr></table></figure>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/05/20/200520-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / webpack的基本配置">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/04/21/200421-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / webpack打包图片及动态修改显示">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

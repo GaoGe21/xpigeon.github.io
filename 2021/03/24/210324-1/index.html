@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / 学习使用Swiper｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2021/03/24/210324-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OEKDkF.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OEKDkF.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / 学习使用Swiper</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2021-03-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JS"
+                           title="JS">JS</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / 学习使用Swiper
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>贴官网：<a target="_blank" rel="noopener" href="https://swiper.com.cn/api/start/new.html">Swiper</a></p>
+</blockquote>
+<p>最近使用Swiper写了个组件，完成以下内容：</p>
+<p>设置三个页面每隔10秒自动轮播。设置页脚可点击换页。鼠标移入界面后停止轮播，移出后继续</p>
+<p>总结遇到的问题做个记录，准备贴代码：</p>
+<h2 id="1-初始化Swiper"><a href="#1-初始化Swiper" class="headerlink" title="1. 初始化Swiper"></a>1. 初始化Swiper</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    if (window.Swiper) &#123;</span><br><span class="line">      const swiper &#x3D; new window.Swiper(&#39;.swiper-container&#39;, &#123;          &#x2F;&#x2F; 1</span><br><span class="line">        direction: &#39;horizontal&#39;,                                       &#x2F;&#x2F; 2</span><br><span class="line">        loop: true,                                                    &#x2F;&#x2F; 3</span><br><span class="line">        autoplay: &#123;                                                    &#x2F;&#x2F; 4</span><br><span class="line">          delay: 10000</span><br><span class="line">        &#125;,</span><br><span class="line">        pagination: &#123;                                                  &#x2F;&#x2F; 5</span><br><span class="line">          el: &#39;.swiper-pagination&#39;,</span><br><span class="line">          clickable: true</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      swiper.on(&#39;slideChange&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">        this.forceUpdate();</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      const container &#x3D; document.getElementById(&#39;swiper_container&#39;);   &#x2F;&#x2F; 6</span><br><span class="line">      container.onmouseenter &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">        swiper.autoplay.stop();</span><br><span class="line">      &#125;;</span><br><span class="line">      container.onmouseleave &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">        swiper.autoplay.start();</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>(1) 通过new进行初始化，设置外层Swiper容器的css选择器：**’.swiper-container’**</p>
+<p>(2) direction设置滚动方向：<strong>horizontal</strong> 水平方向切换</p>
+<p>(3) loop设置循环为true后，Swiper会自动在轮播页面的前后分别复制页面来实现循环的设置。如果不设置，在播放完最后一页后，动画改为向前跳转到第一页，而不是向后继续轮播。</p>
+<ul>
+<li><p>在添加loop设置循环后出现问题:</p>
+<p>  轮播过程中偶尔出现某一页节点正确显示，但数据没有显示的问题。在网上查看了些大概确定原因是，Swiper在复制页面时仅复制了节点信息。</p>
+<p>  解决办法：通过实例的on方法，监听<strong>slideChange</strong>事件，在切换事件执行后强制界面刷新。</p>
+</li>
+</ul>
+<p>(4) autoplay设置自动播放，延时10秒。即每10秒切换界面</p>
+<p>(5) pagination设置分页器：<br>el：分页器容器的css选择器，render时，将分页器节点放在container中的最底部。<br>clickable： 设置为true用来控制分页器点击时的页面切换</p>
+<p>(6) 设置鼠标移入移除事件: 此处通过ById来获取容器的节点，也可以通过class</p>
+<p>在容器的 onmouseenter/onmouseleave上分别设置swiper自动播放的结束/开始， 可以实现鼠标移入停止自动轮播，移出继续计时自动轮播。</p>
+<h2 id="2-render部分"><a href="#2-render部分" class="headerlink" title="2. render部分"></a>2. render部分</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    const &#123;children&#125; &#x3D; this.props;</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">      &lt;div className&#x3D;&#39;swiper-container swiper-no-swiping&#39; id&#x3D;&#39;swiper_container&#39;&gt;</span><br><span class="line">        &lt;div className&#x3D;&#39;swiper-wrapper&#39;&gt;</span><br><span class="line">          &#123;(children || []).map((child) &#x3D;&gt; &#123;</span><br><span class="line">            return &lt;div className&#x3D;&#39;swiper-slide&#39;&gt;&#123;child&#125;&lt;&#x2F;div&gt;;</span><br><span class="line">          &#125;)&#125;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div className&#x3D;&#39;swiper-pagination&#39; &#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>(1) 设置 <strong>‘swiper-no-swiping’</strong> 类名，用来控制slide无法拖动</p>
+<h2 id="3-样式部分设置"><a href="#3-样式部分设置" class="headerlink" title="3. 样式部分设置"></a>3. 样式部分设置</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;</span><br><span class="line">  .swiper-container&#123;</span><br><span class="line">    --swiper-theme-color: #ff6600;          &#x2F;* 设置Swiper风格 *&#x2F;</span><br><span class="line">    --swiper-navigation-color: #308376      &#x2F;* 单独设置按钮颜色 *&#x2F;</span><br><span class="line">    --swiper-navigation-size: 30px;         &#x2F;* 设置按钮大小 *&#x2F;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-使用该组件时"><a href="#4-使用该组件时" class="headerlink" title="4. 使用该组件时"></a>4. 使用该组件时</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import Carousel from &#39;carousel&#39;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">const contentStyle &#x3D; &#123;</span><br><span class="line">    width: &#39;100%&#39;,</span><br><span class="line">    height: &#39;160px&#39;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">&lt;Carousel&gt;</span><br><span class="line">    &lt;div style&#x3D;&#123;contentStyle&#125;&gt;第一页&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div style&#x3D;&#123;contentStyle&#125;&gt;第二页&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div style&#x3D;&#123;contentStyle&#125;&gt;第三页&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;Carousel&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>以上仅记录实现需求所用到的属性和方法，更多api见官网。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/04/04/210404-1/" data-toggle="tooltip" data-placement="top"
+                           title="photo / 苏州">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/01/07/210107-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / Object.keys是如何排序的？">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96Swiper"><span class="toc-text">1. 初始化Swiper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-render%E9%83%A8%E5%88%86"><span class="toc-text">2. render部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A0%B7%E5%BC%8F%E9%83%A8%E5%88%86%E8%AE%BE%E7%BD%AE"><span class="toc-text">3. 样式部分设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E8%AF%A5%E7%BB%84%E4%BB%B6%E6%97%B6"><span class="toc-text">4. 使用该组件时</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / Redux相关概念及API整理｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2019/04/23/190423-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OEnMct.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OEnMct.png?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / Redux相关概念及API整理</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2019-04-23
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#React/Redux"
+                           title="React/Redux">React/Redux</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / Redux相关概念及API整理
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>“如果你不知道是否需要使用Redux，那就是不需要。”</p>
+</blockquote>
+<p>在React中，其实是有一套自己的生命周期函数以及状态管理的方法的。</p>
+<p>那么我们需要在何时使用Redux？</p>
+<p>我的理解是：对于单页面程序，在页面操作越来越多，逻辑越来越复杂的情况下，其实是需要将一些组件的状态共享，以便在任何地方都可以使用的。此时单纯的使用React已经不能解决问题了，需要使用Redux。利用redux单一数据源（store）的特点，将所有状态放在一起进行管理，在任何地方使用。</p>
+<p>下面介绍以下几个重要的东西：</p>
+<h3 id="store"><a href="#store" class="headerlink" title="- store"></a>- <strong>store</strong></h3><p>redux的特点就是它只有一个store，将所有state存放在同一个store中管理，store主要有以下几个方法：<br>（1）getState() 方法获取 state<br>（2） dispatch(action) 方法更新 state<br>（3） subscribe(listener) 添加监听器</p>
+<h3 id="props"><a href="#props" class="headerlink" title="- props"></a>- <strong>props</strong></h3><p>props用于定义外部接口。react是单项数据流，props本身是不可改变的，不过子组件的props可以通过父组件的state的传递进而进行改变。</p>
+<h3 id="state"><a href="#state" class="headerlink" title="- state"></a>- <strong>state</strong></h3><p>state即是状态，用于记录组件内部的状态。我们可以用state来完成对行为的控制、数据的更新、界面的渲染，由于组件不能修改传入的props，所以需要记录自身的数据变化。说白了，有一些状态是会在交互或者发请求等过程中发生改变的，例如：panel的打开与关闭，radio的勾选与取消，下拉框选中值的切换…这些能改变的状态会被存为state。</p>
+<p>Redux中明确规定，一个state对应一个view，state相同，view就相同。state改变，view的界面就会跟着改变。我们要如何改变state，就有了接下来的action。</p>
+<h3 id="action"><a href="#action" class="headerlink" title="- action"></a>- <strong>action</strong></h3><p>action顾名思义就是个动作，用来更新对应的state，是一个包含当前state以及自身actionType类型的对象。</p>
+<h3 id="action-creator"><a href="#action-creator" class="headerlink" title="- action creator"></a>- <strong>action creator</strong></h3><p>action的创建函数。在actionCreator中主要有两种函数：<br>一种是用来更新state的action，该函数返回一个对象。如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const updateAge = (age: string): object =&gt; &#123;</span><br><span class="line"> <span class="keyword">return</span> &#123;</span><br><span class="line">  age,</span><br><span class="line">        <span class="built_in">type</span>: UPDATE_AGE</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>另一种是用来发请求、加载数据的函数，该函数可以返回一个方法，也可以是一个promise对象。如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const getInfo: () =&gt; Promise&lt;T&gt; = () =&gt; &#123;</span><br><span class="line"> return new Promise(resolve =&gt; resolve());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="reducer"><a href="#reducer" class="headerlink" title="- reducer"></a>- <strong>reducer</strong></h3><p>reducer是一个纯函数，接受previousState和action作为参数，返回一个新的nextState。写法如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const reducer = (state = defaultState, state) =&gt; &#123;</span><br><span class="line"> // ...</span><br><span class="line"> <span class="keyword">return</span> new state;</span><br><span class="line">&#125;</span><br><span class="line">//defaultState 为初始状态，默认值</span><br></pre></td></tr></table></figure>
+<p>当应用越来越复杂，考虑将reducer拆分成多个单独的函数，负责独立管理一部分state。使用 **combineReducers(reducers)**可以将多个合并为一个reducer函数，然后就可以对这个 reducer 调用 createStore 方法了。</p>
+<h3 id="UI组件和容器组件"><a href="#UI组件和容器组件" class="headerlink" title="- UI组件和容器组件"></a>- <strong>UI组件和容器组件</strong></h3><p>UI组件： 单纯用来展示界面，没有任何状态的傻瓜组件<br>容器组件： 用来与redux连接，从redux中获取数据作为props</p>
+<p><strong>connect</strong>：把 React 组件和 Redux 的 store 连接起来。</p>
+<p>**connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])**：<br>connect返回一个函数，它接受一个React组件的构造函数作为连接对象，最终返回连接好的组件构造函数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const UserContainer = connect(mapStateToProps, mapDispatchToProps)(User)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>1.mapStateToProps</strong>：**mapStateToProps(state, ownProps) : stateProps **<br>将容器组件接收的新state映射成UI组件所对应的props，进而传递给子组件的方法。</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">const mapStateToProps: IMapStateToProps&lt;IUserProps&gt; =</span><br><span class="line">    (&#123; user &#125;) =&gt; (&#123; ...user &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>2.mapDispatchToProps</strong>：<strong>mapDispatchToProps(dispatch, ownProps): dispatchProps</strong><br>将用户派发的action进行映射，bindActionCreators将 多个action 和 dispatch 组合起来生成mapDispatchToProps 需要生成的内容。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const mapDispatchToProps: IMapDispatchToProps =</span><br><span class="line">    (dispatch) =&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> bindActionCreators(&#123;</span><br><span class="line">            ...UserActionCreator,</span><br><span class="line">        &#125;, dispatch);</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>3.mergeProps</strong> : ** [mergeProps(stateProps, dispatchProps, ownProps): props]**<br>不管是 stateProps 还是 dispatchProps，都需要和 ownProps 进行merge 之后，才会被赋给组件使用。通常可以不传这个参数，connect 会使用 Object.assign 替代该方法。</li>
+</ul>
+<h3 id="Provider"><a href="#Provider" class="headerlink" title="- Provider"></a>- <strong>Provider</strong></h3><p>react-redux除了提供connect， 还提供了另外一个重要对象：Provider，它使 React 组件可被连接。<br>用法即是将Provider组件包在最外层容器上，如下：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line"> &lt;User/&gt;</span><br><span class="line">&lt;/Provider&gt;</span><br></pre></td></tr></table></figure>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/04/25/190425-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / HTTP请求状态码">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/04/17/190417-1/" data-toggle="tooltip" data-placement="top"
+                           title="essay / 致橡树 (To the Oak Tree)">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#store"><span class="toc-text">- store</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#props"><span class="toc-text">- props</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#state"><span class="toc-text">- state</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#action"><span class="toc-text">- action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#action-creator"><span class="toc-text">- action creator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reducer"><span class="toc-text">- reducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UI%E7%BB%84%E4%BB%B6%E5%92%8C%E5%AE%B9%E5%99%A8%E7%BB%84%E4%BB%B6"><span class="toc-text">- UI组件和容器组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Provider"><span class="toc-text">- Provider</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

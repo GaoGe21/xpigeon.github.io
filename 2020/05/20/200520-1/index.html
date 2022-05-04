@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / webpack的基本配置｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2020/05/20/200520-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OEYlTI.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OEYlTI.png?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / webpack的基本配置</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2020-05-20
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#webpack"
+                           title="webpack">webpack</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / webpack的基本配置
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>webpack 是一个现代 JavaScript 应用程序的静态模块打包器。它会递归地构建一个依赖关系图，包含应用程序需要的每个模块，然后将所有模块打包成一个或多个 bundle。</p>
+</blockquote>
+<p>一. webpack有以下五个核心概念：</p>
+<ul>
+<li><strong>入口(entry)</strong> ：webpack会根据设置的入口文件，一直向下查找直接或间接的依赖，构建出一整个内部依赖图。默认值**”./src”**</li>
+<li><strong>输出(output)</strong> ：webpack创建的bundles的输出位置。默认值**”./dist”**</li>
+<li><strong>转换器(loader)</strong> ：将所有类型文件转换成webpack能处理的有效文件（webpack 自身只理解 JavaScript）</li>
+<li><strong>插件(plugins)</strong> ：处理比loader范围更广的任务，包括压缩，优化打包等。</li>
+<li><strong>模式(mode)</strong> ：通过设置development/production，来启用不同模式下webpack不同的内置优化。</li>
+</ul>
+<p>二. 初始化项目，安装webpack（安装前确保已安装Node.js）</p>
+<ol>
+<li>新建文件夹，或者github新建respository。我的文件夹<strong>customUI</strong>，终端打开执行 <code>npm init -y</code>  进行初始化（也可以yarn）。</li>
+</ol>
+<ol start="2">
+<li><p>在 webpack4 里将内核和cli进行了分离，所以需要分别安装webpack和webpack-cli，执行  <code>npm install webpack webpack-cli -D</code></p>
+<p>其中：<br>（1） -D 是 –save-dev的简写，表示将依赖安装在devDependencies里<br>（2）安装完成后可以通过<code>npx webpack -v</code> 查看安装的版本号</p>
+</li>
+</ol>
+<p><img src="/2020/05/20/200520-1/01.jpg"></p>
+<p> 此时可以看到目录中生成了三个文件：</p>
+<ul>
+<li>node_modules：依赖包</li>
+<li> package-lock.json：用来记录当前状态下实际安装的各个npm package的具体来源和版本号</li>
+<li>package.json：模块的描述文件</li>
+</ul>
+<p>初始化已完成，接下来需要进行webpack文件内部配置</p>
+<ol start="3">
+<li>配置<strong>entry</strong>入口<br>在当前目录下创建一个  <code>webpack.config.js</code> 文件，首先配置entry：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    entry: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>entry</strong> 的值：<br>（1）字符串：单文件入口<br>（2）数组：多个主入口<br>（3）对象：可扩展的定义方式</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">        entry: &#123;</span><br><span class="line">                custom: <span class="string">&#x27;./src/custom.js&#x27;</span>,</span><br><span class="line">                app: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>配置<strong>output</strong>出口<br>向硬盘写入编译文件，只能有一个输出。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const path = require(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    entry: <span class="string">&#x27;./src/index.js&#x27;</span>,</span><br><span class="line">    output: &#123;</span><br><span class="line">            filename: <span class="string">&#x27;custom.js&#x27;</span>,</span><br><span class="line">            path: path.resolve(__dirname, <span class="string">&#x27;bundle&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中：<br>（1）const path = require(‘path’);  直接引用。node中自带的模块<br>（2）__dirname 是node的内置变量</p>
+<ol start="5">
+<li>配置<strong>babel-loader</strong>，将高版本包括ES6，ES7等转换成低版本JS</li>
+</ol>
+<p>（1）新建文件夹<strong>src</strong>，创建文件<strong>index.js</strong>，随便写一些：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    getName() &#123;</span><br><span class="line">        <span class="keyword">return</span> this.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const person = new Person(<span class="string">&quot;Tom&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>（2）此时可以进行构建 <code>npx webpack --mode=development</code> （默认是 production 模式），执行后可以看到在当前目录下出现上一步output时设置的bundle文件夹，并且包含一个custom.js文件</p>
+<p><img src="/2020/05/20/200520-1/02.jpg"></p>
+<p> 可以看到，custom.js里并没有被转义为低版本</p>
+<p>（3） 安装babel-loader，执行 <code>npm install babel-loader -D</code></p>
+<p>在配置babel同时，需要安装以下依赖：</p>
+<p><code>npm install @babel/core @babel/preset-env @babel/plugin-transform-runtime -D</code><br><code>npm install @babel/runtime @babel/runtime-corejs3</code></p>
+<p>babel7详细问题可以参见这篇文章<a target="_blank" rel="noopener" href="https://juejin.im/post/5ddff3abe51d4502d56bd143">不容错过的 Babel7 知识</a></p>
+<p>webpack中添加如下配置：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    ...</span><br><span class="line">    module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.jsx?$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        presets: [<span class="string">&quot;@babel/preset-env&quot;</span>],</span><br><span class="line">                        plugins: [</span><br><span class="line">                            [</span><br><span class="line">                                <span class="string">&quot;@babel/plugin-transform-runtime&quot;</span>,</span><br><span class="line">                                &#123;</span><br><span class="line">                                    <span class="string">&quot;corejs&quot;</span>: <span class="number">3</span></span><br><span class="line">                                &#125;</span><br><span class="line">                            ]</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/ //排除 node_modules 目录</span><br><span class="line">            &#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>给loader添加exclude，表示此目录不需要我们编译，可以有效提升编译效率。</p>
+<p>（4）新建文件.babelrc</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;presets&quot;</span>: [<span class="string">&quot;@babel/preset-env&quot;</span>],</span><br><span class="line">    <span class="string">&quot;plugins&quot;</span>: [</span><br><span class="line">        [</span><br><span class="line">            <span class="string">&quot;@babel/plugin-transform-runtime&quot;</span>,</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="string">&quot;corejs&quot;</span>: <span class="number">3</span></span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（5）此时可以执行<code>npx webpack --mode=development</code> 构建。</p>
+<p>解释loader所需的配置：</p>
+<ul>
+<li><strong>module对象里有一个数组rules</strong>：数组的每一项为我们设置的loader </li>
+<li><strong>数组rules中可以包含多个对象</strong>：每一个对象有 test 和 use两个属性 </li>
+<li><strong>test</strong>：   是一个字段匹配的规则，对应处理符合规则的文件</li>
+<li><strong>use</strong>：<br>① 可以是一个字符串，例如 <code>use: &#39;babel-loader&#39;</code><br>② 可以是一个数组，例如 <code>use: [&#39;style-loader&#39;, &#39;css-loader&#39;]</code><br>③ 可以是一个对象，例如<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.jsx?$/,</span><br><span class="line">                use: &#123;</span><br><span class="line">                    loader: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        presets: [<span class="string">&quot;@babel/preset-env&quot;</span>]</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">                exclude: /node_modules/</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol start="6">
+<li>配置<strong>ts-loader</strong>，可以对TypeScript语法进行编译<br>（1） 初始化安装TypeScript以及其对应的loader转换器<br><code>npm install typescript -D</code><br><code>npm install ts-loader -D</code>   </li>
+</ol>
+<p>（2） 新建一个 <strong>tsconfig.json</strong> 文件 ，具体配置参见<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">官方文档</a> ，以下是我的简单配置：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;module&quot;</span>: <span class="string">&quot;commonjs&quot;</span>,</span><br><span class="line">        <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;./bundle&quot;</span>,</span><br><span class="line">        <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es5&quot;</span>,</span><br><span class="line">        <span class="string">&quot;allowJs&quot;</span>: true, // 允许js语法再ts环境运行</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;exclude&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;./node_modules&quot;</span>  </span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（3）新建一个app.ts</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;./index.scss&quot;</span>;</span><br><span class="line"></span><br><span class="line">console.log(<span class="string">&#x27;this is app.ts&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>配置<strong>css-loader</strong>和<strong>style-loader</strong>, 处理样式文件<br>执行<code>npm install css-loader style-loader sass-loader node-sass -D</code></li>
+</ol>
+<p>在webpack.config.js中添加：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">            ...</span><br><span class="line">            &#123;</span><br><span class="line">                test: /\.s?css$/,</span><br><span class="line">            use: [<span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>, <span class="string">&#x27;sass-loader&#x27;</span>],</span><br><span class="line">            exclude: /node_modules/</span><br><span class="line">        &#125;</span><br><span class="line">        ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时在当前目录新建一个index.scss，随便添加一个测试样式：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$color: yellow;</span><br><span class="line">body&#123;</span><br><span class="line">    background: $color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中：<br>（1）style-loader：动态创建style标签，将css插入到head中<br>（2）css-loader：负责处理 @import 等语句<br>（3）sass-loader：负责处理编译 .scss文件，将其转为css</p>
+<ol start="8">
+<li> 处理图片/字体文件，配置<strong>file-loader</strong>和<strong>url-loader</strong><br>执行 <code>npm install url-loader file-loader -D</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">        rules: [</span><br><span class="line">                ...</span><br><span class="line">             &#123;</span><br><span class="line">            test: /\.(jpe?g|png|gif|svg|ico)$/i,</span><br><span class="line">            use: [&#123;</span><br><span class="line">                loader: <span class="string">&#x27;file-loader&#x27;</span>,</span><br><span class="line">                options: &#123;</span><br><span class="line">                    limit: <span class="number">10240</span>,</span><br><span class="line">                    outputPath: <span class="string">&#x27;imgs&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;],</span><br><span class="line">            exclude: /node_modules/</span><br><span class="line">        &#125;,</span><br><span class="line">        ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中：<br>（1）file-loader与url-loader功能类似，可以设置limit范围，如例子中的 <strong>limit: 10240</strong>，表示当资源大小小于10K时，将其转换为base64，超过10k，将图片打进文件，且设置了一个文件输出路径，在imgs文件夹下。</p>
+<ol start="9">
+<li>添加完基本的loader配置后，我们需要查看在浏览器中显示的效果。<br>（1）使用html-webpack-plugin 插件来完成，执行 <code>npm install html-webpack-plugin -D</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">const HtmlWebpackPlugin = require(<span class="string">&#x27;html-webpack-plugin&#x27;</span>);</span><br><span class="line">const isDev = process.env.NODE_ENV === <span class="string">&#x27;development&#x27;</span>;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">    ...</span><br><span class="line">    mode: isDev ? &#x27;development&#x27; : &#x27;production&#x27;,</span><br><span class="line">        plugins: [</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: <span class="string">&#x27;./src/index.html&#x27;</span>,</span><br><span class="line">            filename: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">            minify: &#123;</span><br><span class="line">                removeAttributeQuotes: false, //是否删除属性的双引号</span><br><span class="line">                collapseWhitespace: false, //是否折叠空白</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li>安装完成后，使用require将该插件引入，并通过new创建一个实例对象。</li>
+<li>plugins是一个数组，可以设置多个插件</li>
+<li>template：设置一个输入口</li>
+<li>filename：打包后的文件名</li>
+</ul>
+<p>（2）安装<strong>webpack-dev-server</strong>  执行 <code>npm install webpack-dev-server -D</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;webpack-dev-server&quot;</span>,</span><br><span class="line">    <span class="string">&quot;build&quot;</span>: <span class="string">&quot;webpack&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在控制台执行<code>npm run dev</code> ，就可以正常启动页面了。</p>
+<p>界面打开后，可以直观的看到我的css已经设置成功，打开控制台，ts文件中的console也输出了，但有一个警告：</p>
+<p><img src="/2020/05/20/200520-1/03.jpg"></p>
+<ol start="10">
+<li>设置<strong>devtools</strong><br>devtool 中的一些设置，可以帮助我们将编译后的代码映射回原始源代码，不同的值会明显影响到构建和重新构建的速度。<figure class="highlight"><table><tr><td class="code"><pre><span class="line">devtool: isDev ? &#x27;source-map&#x27; : &#x27;none&#x27;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/06/07/200607-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / github提交记录回滚">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/05/02/200502-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / fetch API">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

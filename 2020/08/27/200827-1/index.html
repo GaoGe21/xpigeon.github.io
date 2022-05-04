@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / 二叉树｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2020/08/27/200827-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2020/08/31/dLGmSf.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2020/08/31/dLGmSf.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / 二叉树</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2020-08-27
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#算法"
+                           title="算法">算法</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / 二叉树
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="树-二叉树"><a href="#树-二叉树" class="headerlink" title="树/二叉树"></a>树/二叉树</h2><p><strong>根节点</strong>：树顶部的节点，没有父节点。⑪<br><strong>内部节点</strong>：至少有一个子节点。⑦⑤⑨⑮⑬⑳<br><strong>外部节点（叶节点）</strong>：没有子节点。③⑥⑧⑩…下面一排</p>
+<p><strong>子树</strong>：由一个节点和它的后代构成。例如：⑬⑫⑭构成树中的一棵子树。</p>
+<p><strong>节点深度</strong>：取决于祖先节点的数量。③的深度是3，因为有⑤⑦⑪三个祖先。<br><strong>树的高度</strong>：节点深度的最大值。（根节点是第0层）</p>
+<p><img src="/2020/08/27/200827-1/01.jpg"></p>
+<p> <strong>二叉树</strong>：节点最多有两个子节点，左侧子节点 + 右侧子节点<br> <strong>二叉搜索树</strong>：BST（BinarySearchTree），二叉树的一种。<br> 只允许左侧节点存储比父节点小的值，右侧节点存储比父节点大的值。上图就是二叉搜索树</p>
+<hr>
+<p>创建一个Node类，通过构造函数可以创建出一个实例，其上包含key节点值，左侧子节点引用，右侧子节点引用（初始值null）三个属性。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">export class Node &#123;</span><br><span class="line">	constructor(key) &#123;</span><br><span class="line">		this.key &#x3D; key;</span><br><span class="line">		this.left &#x3D; null;</span><br><span class="line">		this.right &#x3D; null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个BinarySearchTree类：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#123; Node &#125; from &quot;.&#x2F;node&quot;;</span><br><span class="line">import &#123; defaultCompare &#125; from &quot;util&quot;;</span><br><span class="line"></span><br><span class="line">export class BinarySearchTree&#123;</span><br><span class="line">	constructor(compareFn &#x3D; defaultCompare) &#123;</span><br><span class="line">		this.compareFn &#x3D; compareFn;</span><br><span class="line">		this.root&#x3D; null;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="向树中插入键值"><a href="#向树中插入键值" class="headerlink" title="向树中插入键值"></a>向树中插入键值</h2><ol>
+<li>判断想要插入的节点是否是根节点<br> 如果是，直接new一个类实例，并将root属性指向该新节点。（左右指针自动设置null）</li>
+<li>插入的不是根节点而是其他节点<br> 使用一个递归的方法来计算节点将要插入的位置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insert(key) &#123;</span><br><span class="line">	if(this.root &#x3D;&#x3D; null) &#123;</span><br><span class="line">		this.root &#x3D; new Node(key);</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		this.insertNode(this.root, key);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>insertNode方法第一次传入的是树的根节点和要插入的新节点。</li>
+<li>如果新节点值 &lt; 当前节点值，那么检查当前节点的左侧子节点。<br> 左侧子如果没有值，将新节点赋给左侧子。否则递归调用insertNode方法，将左侧子节点和需要插入的新节点作为参数继续执行。</li>
+<li>如果新节点值 &gt; 当前节点值，那么检查当前节点的右侧子节点。<br> 右侧子如果没有值，将新节点赋给右侧子。否则递归调用insertNode方法，将右侧子节点和需要插入的新节点作为参数继续执行。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">insertNode(node, key) &#123;</span><br><span class="line">	if(this.compareFn(key, node.key) &#x3D;&#x3D;&#x3D; Compare.LESS_THAN) &#123;</span><br><span class="line">		if(node.left &#x3D;&#x3D; null) &#123;</span><br><span class="line">			node.left &#x3D; new Node(key);</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			this.insertNode(node.left, key);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		if(node.right &#x3D;&#x3D; null) &#123;</span><br><span class="line">			node.right &#x3D; new Node(key);</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			this.insertNode(node.right, key);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="搜索最小-最大值"><a href="#搜索最小-最大值" class="headerlink" title="搜索最小/最大值"></a>搜索最小/最大值</h2><p>从图中可以看出，当想要查找整个树中的最小值时，需要一直查看当前节点是否有左侧子节点。如果有，继续向下一层查找左侧子节点…同理，查找最大值时，一直查找右侧子节点</p>
+<p><img src="/2020/08/27/200827-1/02.jpg"></p>
+<p>首先，暴露出可用的min方法，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">min() &#123;</span><br><span class="line">	return this.minNode(this.root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>minNode方法中，通过循环判断当前根节点是否存在左侧子节点的方法，找到最小的左侧值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">minNode(node) &#123;</span><br><span class="line">	let current &#x3D; node;</span><br><span class="line">	while(current !&#x3D;&#x3D; null &amp;&amp; current.left !&#x3D;&#x3D; null) &#123;</span><br><span class="line">		current &#x3D; current.left;</span><br><span class="line">	&#125;</span><br><span class="line">	return current;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同理，可以实现max方法。（传入根节点，遍历整棵树）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">max() &#123;</span><br><span class="line">	return this.maxNode(this.root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>maxNode方法中，通过循环判断当前根节点是否存在右侧子节点的方法，找到最大的右侧值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">maxNode(node) &#123;</span><br><span class="line">	let current &#x3D; node;</span><br><span class="line">	while(current !&#x3D;&#x3D; null &amp;&amp; current.right !&#x3D;&#x3D; null) &#123;</span><br><span class="line">		current &#x3D; current.right;</span><br><span class="line">	&#125;</span><br><span class="line">	return current;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="搜索特定值"><a href="#搜索特定值" class="headerlink" title="搜索特定值"></a>搜索特定值</h2><p>首先，暴露出外部可用的search方法，接受两个参数：根节点this.root和想要搜索的节点key，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">search() &#123;</span><br><span class="line">	return this.searchNode(this.root, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>searchNode方法内部，如果节点是null，直接返回false。如果要找的值比当前节点小，则继续在左侧子树上搜索。如果要找的值比当前节点大， 则继续在右侧子树上搜索。否则，则说明要找的值与当前节点相等。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">searchNode(node, key) &#123;</span><br><span class="line">	if(node &#x3D;&#x3D; null) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">	if(this.compareFn(key, node.key) &#x3D;&#x3D;&#x3D; Compare.LESS_THAN) &#123;</span><br><span class="line">		return this.searchNode(node.left, key);</span><br><span class="line">	&#125; else if (this.compareFn(key, node.key) &#x3D;&#x3D;&#x3D; Compare.BIGGER_THAN) &#123;</span><br><span class="line">		return this.searchNode(node.right, key);</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="移除一个节点"><a href="#移除一个节点" class="headerlink" title="移除一个节点"></a>移除一个节点</h2><p>首先，暴露出外部可用的search方法，接受两个参数：根节点this.root和想要搜索的节点key，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">remove(key) &#123;</span><br><span class="line">	this.root &#x3D; this.removeNode(this.root, key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>判断当前节点是否为null，如果是直接返回null</p>
+</li>
+<li><p>如果不为null，需要在树中找到要移除的值。如果移除值比当前节点值小，就沿着树左边找下一个节点。如果移除值比当前节点值大，就沿着树右边找下一个节点。</p>
+</li>
+<li><p>找到移除值的位置后，分为以下三种情况：</p>
+</li>
+</ol>
+<p>① <strong>移除的节点既没有左侧子，又没有右侧子（叶节点）</strong>：<br>此时直接将该节点赋值null来移除它。（重点：单纯将值赋予null是不够的，还要处理指针，这个节点没有任何子节点，但有一个父节点，通过返回null将其父节点指针赋予null）</p>
+<p>② <strong>移除的节点有一个左侧或右侧子节点</strong>：<br>此时需要跳过当前节点，直接将它的父节点的指针指向它的子节点。<br>如果它没有左侧子，说明她有右侧子。需要把它父节点指针指向它的右侧子，并返回更新后的节点。</p>
+<p>有左没右同理。</p>
+<p>③ <strong>移除的节点有两个子节点</strong>：<br>此时当前移除的节点既有左侧子，又有右侧子。<br>如果移除了这个节点，首先需要找到它右侧子树中最小的节点（它的继承者）。用这个右侧子树中的最小值更新这个节点，改变他的值也就是被移除了。但此时存在两个相同值的节点，要把右侧子树中原有的最小节点移除。最后向父节点返回更新后的指针。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">removeNode(node, key) &#123;</span><br><span class="line">	if(node &#x3D;&#x3D; null) &#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	if(this.compareFn(key, node.key) &#x3D;&#x3D;&#x3D; Compare.LESS_THAN) &#123;</span><br><span class="line">		node.left &#x3D; this.removeNode(node.left, key);</span><br><span class="line">		return node;</span><br><span class="line">	&#125; else if (this.compareFn(key, node.key) &#x3D;&#x3D;&#x3D; Compare.BIGGER_THAN) &#123;</span><br><span class="line">		node.right &#x3D; this.removeNode(node.right, key);</span><br><span class="line">		return node;</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		if(node.left &#x3D;&#x3D; null &amp;&amp; node.right &#x3D;&#x3D; null) &#123;</span><br><span class="line">			node &#x3D; null;</span><br><span class="line">			return node;</span><br><span class="line">		&#125; &#x2F;&#x2F; ①</span><br><span class="line">		if(node.left &#x3D;&#x3D; null) &#123;</span><br><span class="line">			node &#x3D; node.right;</span><br><span class="line">			return node;</span><br><span class="line">		&#125; else if(node.right &#x3D;&#x3D; null) &#123;</span><br><span class="line">			node &#x3D; node.left;</span><br><span class="line">			return node;</span><br><span class="line">		&#125; &#x2F;&#x2F; ②</span><br><span class="line">		const aux &#x3D; this.minNode(node.right);</span><br><span class="line">		node.key &#x3D; aux.key;</span><br><span class="line">		node.right &#x3D; this.removeNode(node.right, aux.key);</span><br><span class="line">		return node; &#x2F;&#x2F; ③</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="中序-先序-后序遍历"><a href="#中序-先序-后序遍历" class="headerlink" title="中序/先序/后序遍历"></a>中序/先序/后序遍历</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">inOrderTraverse(callback) &#123;</span><br><span class="line">	this.inOrderTraverseNode(this.root, callback);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>中序遍历：左 -&gt; 根 -&gt; 右 ① -&gt; ② -&gt; ③（应用：对树进行排序，从小到大访问节点）</li>
+<li>先序遍历：根 -&gt; 左 -&gt; 右 ② -&gt; ① -&gt; ③</li>
+<li>后序遍历：左 -&gt; 右 -&gt; 根 ② -&gt; ③ -&gt; ①</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">inOrderTraverseNode(node, callback) &#123;</span><br><span class="line">	if(node !&#x3D; null) &#123;</span><br><span class="line">		this.inOrderTraverseNode(node.left, callback); &#x2F;&#x2F;①</span><br><span class="line">		callback(node.key); &#x2F;&#x2F;②</span><br><span class="line">		this.inOrderTraverseNode(node.right, callback); &#x2F;&#x2F; ③</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行以下，会按照要求的顺序输出：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const printNode &#x3D; (value) &#x3D;&gt; console.log(value);</span><br><span class="line">inOrderTraverse(printNode);</span><br></pre></td></tr></table></figure>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/09/11/200911-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / 学习ES6：Proxy代理">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/08/11/200811-1/" data-toggle="tooltip" data-placement="top"
+                           title="essay / 两棵树的守望">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91-%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">树&#x2F;二叉树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E6%A0%91%E4%B8%AD%E6%8F%92%E5%85%A5%E9%94%AE%E5%80%BC"><span class="toc-text">向树中插入键值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E6%9C%80%E5%B0%8F-%E6%9C%80%E5%A4%A7%E5%80%BC"><span class="toc-text">搜索最小&#x2F;最大值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E7%89%B9%E5%AE%9A%E5%80%BC"><span class="toc-text">搜索特定值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E9%99%A4%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9"><span class="toc-text">移除一个节点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E5%BA%8F-%E5%85%88%E5%BA%8F-%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86"><span class="toc-text">中序&#x2F;先序&#x2F;后序遍历</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

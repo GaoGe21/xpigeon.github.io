@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / 整理一些sass的基本用法｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2019/11/20/191120-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OEKidO.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OEKidO.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / 整理一些sass的基本用法</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2019-11-20
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#css"
+                           title="css">css</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / 整理一些sass的基本用法
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>在我之前参与的项目里，所有的样式都是用css来编写的。因为每个人负责各自的功能模块，导致每一部分的样式都各不相同。这种方式带来的最大问题是：对于同一个组件样式却不相同，想要做统一规范时要修改多处，麻烦且效率低。而且对于单页面程序，在打包压缩之后，会遇到因为命名相同造成样式互相影响的问题。</p>
+<p>Sass是css的预处理器。详细的使用教程可以在<a target="_blank" rel="noopener" href="https://sass-lang.com/documentation">Sass官网</a>查看，官网也提供了<a target="_blank" rel="noopener" href="https://www.sassmeister.com/">在线转换器</a>，方便对比Sass与css的写法区别。</p>
+<p>以下是我自己对于Sass的一些总结，方便以后的使用和学习。</p>
+<p>Sass有两种语法： 一种是SCSS(文件以 .scss 命名)，兼容了css的语法。另一种是SASS (文件以 .sass 命名)，省略了花括号和分号，通过缩进的方式表达嵌套。（缩进语法老旧不推荐使用）</p>
+<h3 id="1-嵌套"><a href="#1-嵌套" class="headerlink" title="1.嵌套"></a><strong>1.嵌套</strong></h3><p>下图列举几种使用频繁的嵌套语法。左边为sass，右边对比常见的css写法：</p>
+<p><img src="/2019/11/20/191120-1/01.jpg"></p>
+<h3 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a><strong>2.变量</strong></h3><p>使用变量代替直接使用值本身，可以做统一的修改。变量以$开头:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$color: green;</span><br><span class="line">.title &#123;</span><br><span class="line"> background: $color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以把变量镶嵌在字符串之中，写在#{ }之中：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$side : left;</span><br><span class="line">.rounded &#123;</span><br><span class="line"> border-<span class="comment">#&#123;$side&#125;-radius: 5px;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设置default，当引入此部分样式文件时，如果声明了同名变量且设置新值，则使用新值，否则使用default值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$color: green !default;</span><br><span class="line">.title &#123;</span><br><span class="line"> background: $color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-注释语法"><a href="#3-注释语法" class="headerlink" title="3.注释语法"></a><strong>3.注释语法</strong></h3><p>静默注释，即// 注释掉的内容不会出现在生成的css文件中<br>（快速记法：单行//不出现，多行/* xxx */出现）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  color: green; // 注释内容不会出现在生成的css文件中</span><br><span class="line">  padding: <span class="number">0</span>; /* 注释内容会出现在生成的css文件中 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-继承"><a href="#4-继承" class="headerlink" title="4.继承"></a><strong>4.继承</strong></h3><p>sass通过@extend语法实现css的样式继承，当一个元素拥有的类（seriousError）表明它属于另一个类（error），这时使用继承再合适不过。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.error &#123;</span><br><span class="line"> width: 30px;</span><br><span class="line"> background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">.seriousError &#123;</span><br><span class="line"><span class="meta">  @extend .error;</span></span><br><span class="line">  border-width: 3px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了可以对class类使用继承，对于css规则同样也可以，比如：<br> @extend a  继承a标签样式</p>
+<h3 id="5-混合器"><a href="#5-混合器" class="headerlink" title="5.混合器"></a><strong>5.混合器</strong></h3><p>混合器可以用来实现大段样式的重用。混合器使用 @mixin 标识符定义，这个标识符给一大段样式定义一个名字，通过引用这个名字重用这段样式。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@mixin round-border &#123;</span></span><br><span class="line"> border-radius: 5px;</span><br><span class="line">&#125;</span><br><span class="line">// 以下引用</span><br><span class="line">notice &#123;</span><br><span class="line"> width: 30px;</span><br><span class="line"> border: 2px solid green;</span><br><span class="line"><span class="meta"> @include round-border;</span></span><br><span class="line">&#125;</span><br><span class="line">// 最终生成</span><br><span class="line">.notice &#123;</span><br><span class="line"> width: 30px;</span><br><span class="line"> border: 2px solid green;</span><br><span class="line"> border-radius: 5px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时，混合器里也可以使用css规则，以及使用sass的父选择器标识符&amp;。在include处的节点，继续引入子节点设置样式</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/12/05/191205-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / styled-components">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/09/29/190929-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / git上传代码报错：faild to push some refs...">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B5%8C%E5%A5%97"><span class="toc-text">1.嵌套</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%98%E9%87%8F"><span class="toc-text">2.变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B3%A8%E9%87%8A%E8%AF%AD%E6%B3%95"><span class="toc-text">3.注释语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BB%A7%E6%89%BF"><span class="toc-text">4.继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%B7%B7%E5%90%88%E5%99%A8"><span class="toc-text">5.混合器</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

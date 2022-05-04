@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / Promise对象｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2019/05/18/190518-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2020/09/14/wDfgYR.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2020/09/14/wDfgYR.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / Promise对象</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2019-05-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#ES6"
+                           title="ES6">ES6</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / Promise对象
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>promise的状态改变有以下两种情况：<br> pending -&gt; resolved       进行时  -&gt;  已完成<br> pending -&gt; rejected       进行时  -&gt;  已失败</p>
+<p>异步操作的结果决定当前为哪一种状态，状态改变之后会一直保持，可以在任何时候获得。下面是一个详细的例子：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">let promise = new Promise(function(resolve,reject)&#123;</span><br><span class="line">	 console.log(<span class="string">&quot;异步操作1&quot;</span>);</span><br><span class="line">	<span class="keyword">if</span>(<span class="string">&quot;请求成功&quot;</span>)&#123;</span><br><span class="line">		resolve(value);</span><br><span class="line">		throw new Error(<span class="string">&quot;test&quot;</span>); // 对应<span class="number">5</span>,抛出无效</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		reject(error);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise.then(</span><br><span class="line">	(value) =&gt; &#123;</span><br><span class="line">		console.log(<span class="string">&quot;第一个回调函数，状态变为resolved时调用&quot;</span>);</span><br><span class="line">		<span class="keyword">return</span> getJSON(value); //第二个请求方法</span><br><span class="line">	&#125;</span><br><span class="line">	() =&gt; console.log(&quot;第二个回调函数，状态变为rejected时调用&quot;),</span><br><span class="line">).then(</span><br><span class="line">	() =&gt; console.log(&quot;第二个请求状态改变后的resolved回调&quot;),</span><br><span class="line">	() =&gt; console.log(&quot;第二个请求状态改变后的rejected回调&quot;),</span><br><span class="line">).catch(</span><br><span class="line">	(error) =&gt; console.log(&quot;出错了：&quot;, error);</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>关于以上例子的解释：</p>
+<ol>
+<li>promise 新建后立即执行</li>
+<li>then方法定义在原型对象Promise.prototype上，接受两个回调作为参数，第一个是resolved状态的回调，第二个是rejected状态的回调（可选）</li>
+<li>then方法返回新的Promise实例，因此可以采用链式方法.then().then()</li>
+<li>第一个函数请求成功的回调里发送第二个请求，当请求成功时将第二个请求的状态置为resolved,且调用第二个请求的then方法的resolved回调，失败调rejected</li>
+<li>如果Promise状态已经变成resolved，再抛出错误无效</li>
+<li>错误具有冒泡性质，总是会被下一个catch语句捕获</li>
+<li>上面代码中有三个Promise对象：一个由 getJSON产生，两个由then产生。它们之中任何一个抛出的错误，都会被最后一个catch捕获。</li>
+<li>then方法指定的回调函数，如果运行中抛出错误，也会被catch方法捕获。一般不要在then方法里定义rejected回调，尽量使用catch方法。<br>原因：catch可以捕获前面then执行的错误，更接近同步的方法（try/catch）</li>
+</ol>
+<h3 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a><strong>Promise.resolve()</strong></h3><p> 将现有对象转为Promise对象，Promise.resolve方法参数有以下四种情况：</p>
+<ol>
+<li>参数是promise实例   — 不作任何处理，原封返回实例</li>
+<li>参数是具有then方法的对象  —  将其转为Promise对象，然后立即执行该对象的then方法</li>
+<li>参数不是具有then方法的对象，或根本就不是对象  — 返回一个新的Promise对象，状态为Resolved</li>
+<li>不带参数   —  直接返回一个Resolved状态的Promise对象</li>
+</ol>
+<h3 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a><strong>Promise.all()</strong></h3><p>let p = Promise.all([p1, p2, p3]);</p>
+<p>p的状态由p1、p2、p3决定：</p>
+<ol>
+<li> p1、p2、p3都成功，p状态为fulfilled。p1、p2、p3的返回值组成一个数组，传递给p的回调函数</li>
+<li> p1、p2、p3有一个失败，p状态为rejected。第一个被reject的实例的返回值，传递给p的回调函数</li>
+</ol>
+<h3 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a><strong>Promise.race()</strong></h3><p>只要p1、p2、p3中有一个实例状态改变，p状态就跟着改变。率先改变的 Promise 实例的返回值，就传递给p的回调函数</p>
+<p><strong>Promise.race方法的参数与Promise.all方法一样，如果不是 Promise 实例，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理</strong></p>
+<h3 id="Promise-reject"><a href="#Promise-reject" class="headerlink" title="Promise.reject()"></a><strong>Promise.reject()</strong></h3><p>返回一个新的Promise实例，状态为rejected</p>
+<h3 id="done"><a href="#done" class="headerlink" title="done()"></a><strong>done()</strong></h3><p>Promise对象的回调链，不管以then方法或catch方法结尾，要是最后一个方法抛出错误，都有可能无法捕捉到（因为Promise内部的错误不会冒泡到全局）。因此，我们可以提供一个done方法，总是处于回调链的尾端，保证抛出任何可能出现的错误。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">asyncFunc()</span><br><span class="line">  .then(f1)</span><br><span class="line">  .catch(r1)</span><br><span class="line">  .then(f2)</span><br><span class="line">  .done();</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Promise.prototype.done = function (onFulfilled, onRejected) &#123;</span><br><span class="line">  this.then(onFulfilled, onRejected)</span><br><span class="line">    .catch(function (reason) &#123;</span><br><span class="line">      // 抛出一个全局错误</span><br><span class="line">      setTimeout(() =&gt; &#123; throw reason &#125;, 0);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="finally"><a href="#finally" class="headerlink" title="finally()"></a><strong>finally()</strong></h3><p>finally方法用于指定不管Promise对象最后状态如何，都会执行的操作。它与done方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">server.listen(<span class="number">0</span>)</span><br><span class="line">  .then(function () &#123;</span><br><span class="line">    // run test</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">finally</span>(server.stop);</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Promise.prototype.<span class="keyword">finally</span> = function (callback) &#123;</span><br><span class="line">  let P = this.constructor;</span><br><span class="line">  <span class="keyword">return</span> this.then(</span><br><span class="line">    value  =&gt; P.resolve(callback()).then(() =&gt; value),</span><br><span class="line">    reason =&gt; P.resolve(callback()).then(() =&gt; &#123; throw reason &#125;)</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/08/03/190929-2/" data-toggle="tooltip" data-placement="top"
+                           title="photo / 上海">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/05/03/190503-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / React生命周期">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-resolve"><span class="toc-text">Promise.resolve()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-all"><span class="toc-text">Promise.all()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-race"><span class="toc-text">Promise.race()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-reject"><span class="toc-text">Promise.reject()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#done"><span class="toc-text">done()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#finally"><span class="toc-text">finally()</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

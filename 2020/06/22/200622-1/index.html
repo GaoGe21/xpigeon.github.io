@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / button组件需求分析-代码实现-问题总结｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2020/06/22/200622-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OEKDkF.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OEKDkF.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / button组件需求分析-代码实现-问题总结</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2020-06-22
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#React/Redux"
+                           title="React/Redux">React/Redux</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / button组件需求分析-代码实现-问题总结
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>组件库源码已上传至<a target="_blank" rel="noopener" href="https://github.com/GaoGe21/leapFrog">github/leapFrog</a></p>
+</blockquote>
+<p>button组件需求分析：</p>
+<p><img src="/2020/06/22/200622-1/01.jpg"></p>
+<p>问题总结：</p>
+<ol>
+<li>如何<strong>继承</strong>button标签和a标签上<strong>自带的属性/方法</strong>？</li>
+</ol>
+<p>react为组件提供了方法:</p>
+<p>button标签使用：<code>React.ButtonHTMLAttributes&lt;HTMLElement&gt;</code><br>a标签使用：<code>React.AnchorHTMLAttributes&lt;HTMLElement&gt;</code></p>
+<ol start="2">
+<li>使用<strong>交叉类型</strong>将自定义的props与标签自带的属性/方法合并：</li>
+</ol>
+<p><code>NativeButtonProps = React.ButtonHTMLAttributes&lt;HTMLElement&gt; &amp; BaseButtonProps;</code><br><code>AnchorButtonProps = React.AnchorHTMLAttributes&lt;HTMLElement&gt; &amp; BaseButtonProps;</code></p>
+<ol start="3">
+<li>如何将<strong>所有属性/方法都设置为可选</strong>？</li>
+</ol>
+<p>TS提供了<strong>Partial</strong>方法，可以将接口内所有的属性/方法改为可选。</p>
+<p><code>export type ButtonProps = Partial&lt;NativeButtonProps, AnchorButtonProps&gt;</code></p>
+<ol start="4">
+<li>解构时，需要将未使用的其他props使用…rest解构出来，然后传入对应的button/a标签中；</li>
+</ol>
+<ol start="5">
+<li>使用classNames时：</li>
+</ol>
+<p>首先定义一个btn作为组件的公共className<br>其次将外部传入的className赋上（如果外部传入className支持外部自定义样式）<br>最后，第三个属性（对象）作为对于不同style的区分设置，如果对象的key是变化的，使用数组形式例如：<br><strong>[<code>btn=$&#123;btnType&#125;</code>]: btnType</strong></p>
+<ol start="6">
+<li>为Button组件设置默认的props，使用<strong>defaultProps</strong>：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Button.defaultProps &#x3D; &#123;</span><br><span class="line">    disabled: false,</span><br><span class="line">    btnType: ButtonType.Default,</span><br><span class="line">    size: ButtonSize.Normal</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7.代码中的痛点？如何产生高质量的代码？</p>
+<p>测试的意义：<br>（1）编写高质量的代码<br>（2）更早的发现bug，减少成本<br>（3） 让重构和升级变得更加容易和可靠<br>（4）让开发流程更加敏捷</p>
+<p><img src="/2020/06/22/200622-1/02.jpg"></p>
+<ol start="8">
+<li>react组件特别适合单元测试：<br>（1）组件化<br>（2）function函数（纯函数：固定的输入对应固定的输出）<br>（3）单项数据流：不会受外部改动影响，只要测试是否触发相应回调即可</li>
+</ol>
+<ol start="9">
+<li>使用 <a target="_blank" rel="noopener" href="https://testing-library.com/">testing library</a>完成组件的单元测试：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#123; render, fireEvent &#125; from &quot;@testing-library&#x2F;react&quot;;</span><br><span class="line">import &#123; Button, ButtonProps, ButtonSize, ButtonType &#125; from &quot;.&#x2F;Button&quot;</span><br><span class="line"></span><br><span class="line">const buttonProps: ButtonProps &#x3D; &#123;</span><br><span class="line">    btnType: ButtonType.Primary,</span><br><span class="line">    size: ButtonSize.Large,</span><br><span class="line">    onClick: jest.fn()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">describe(&quot;case: button component&quot;, () &#x3D;&gt; &#123;</span><br><span class="line">    it(&quot;test Large Primary Button&quot;, () &#x3D;&gt; &#123;</span><br><span class="line">        const wrapper &#x3D; render(&lt;Button&gt;ok&lt;&#x2F;Button&gt;)</span><br><span class="line">        const element &#x3D; wrapper.getByText(&quot;ok&quot;) as HTMLButtonElement</span><br><span class="line">        expect(element).toBeTruthy()</span><br><span class="line">        expect(element).toBeInTheDocument()</span><br><span class="line">        expect(element.tagName).toEqual(&quot;BUTTON&quot;)</span><br><span class="line">        expect(element).toHaveClass(&quot;btn&quot;)</span><br><span class="line">        expect(element.disabled).toBeFalsy()</span><br><span class="line">        fireEvent.click(element)</span><br><span class="line">        expect(linkProps.onClick).toHaveBeenCalled()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;) </span><br></pre></td></tr></table></figure>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/08/03/200803-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / 我理解的BFC">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/06/13/200613-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / 搭配classnames搞样式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

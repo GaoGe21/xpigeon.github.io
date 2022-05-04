@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / React Hook篇｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2020/06/11/200611-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OEKnyt.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OEKnyt.png?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / React Hook篇</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2020-06-11
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#React/Redux"
+                           title="React/Redux">React/Redux</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / React Hook篇
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>最近打算使用<strong>React Hook</strong> +<strong>TypeScript</strong>打造一个前端的组件库，所以在此之前先对React Hook进行了相关总结，方便复习和巩固，后续也会更新TS篇。</p>
+</blockquote>
+<p>React 在16.8中推出了Hook的概念，开始使用<strong>function</strong>组件来替代<strong>class</strong>组件。</p>
+<p>Hook是一个特殊的函数，它提供了相关的钩子函数，用来钩入react的特性。</p>
+<p><strong>Hook 是一种复用状态逻辑的方式，它不复用 state 本身。</strong></p>
+<p>它实质上解决了以下问题：</p>
+<ul>
+<li><p>1.组件很难复用状态逻辑</p>
+</li>
+<li><p>2.复杂组件难以理解，尤其是生命周期里，会包含不相关的逻辑</p>
+</li>
+<li><p>3.高阶组件不能修改函数组件内部的状态，只能在外部修改后，通过props传入</p>
+</li>
+</ul>
+<p>以下介绍hook中提供的几个常用的钩子函数，用来帮助函数组件实现管理内部的state。</p>
+<h3 id="1-useState"><a href="#1-useState" class="headerlink" title="- 1. useState"></a>- <strong>1. useState</strong></h3><p>useState函数接受一个参数，作为当前state的默认值。它的返回值为当前 state 以及更新 state 的函数（理解为class中定义的一个state和更新这个state时调用的setState，<strong>但是它不会把新的state和旧的state进行合并</strong>），state可以是任何简单类型，也可以是复杂类型对象。</p>
+<p>首先创建class组件实现以下功能：在button组件上显示点赞次数，且每点击一次都会执行+1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class LikeButton extends React.Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state &#x3D; &#123; like: 0 &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;button onClick&#x3D;&#123;() &#x3D;&gt; this.setState(&#123; like: this.state.like + 1 &#125;)&#125;&gt;</span><br><span class="line">            &#123;this.state.like&#125;</span><br><span class="line">        &lt;&#x2F;button&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用函数组件编写如下。直观的区别首先代码量就减少了近一半…</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子①</span><br><span class="line">const LikeButton: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const [like, setLike] &#x3D; useState(0);</span><br><span class="line">    return &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setLike(like + 1)&#125;&gt;&#123;like&#125;&lt;&#x2F;button&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以多次调用useState,创建并管理多个state：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子②</span><br><span class="line">const LikeButton: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const [like, setLike] &#x3D; useState(0);</span><br><span class="line">    const [on, setOn] &#x3D; useState(true);</span><br><span class="line">    return &lt;&gt;</span><br><span class="line">        &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setLike(like + 1)&#125;&gt;&#123;like&#125;&lt;&#x2F;button&gt;</span><br><span class="line">        &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setOn(!on)&#125;&gt; &#123;on ? &quot;ON&quot; : &quot;PFF&quot;&#125; &lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以在一个useState中定义一个对象，来包含多个属性。按个人需求选择任意方式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子③</span><br><span class="line">const LikeButton: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const [obj, setObj] &#x3D; useState(&#123; like: 0, on: true &#125;);</span><br><span class="line">    return &lt;&gt;</span><br><span class="line">        &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setObj(&#123; like: obj.like + 1, on: obj.on &#125;)&#125;&gt;</span><br><span class="line">            &#123;obj.like&#125;</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">        &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setObj(&#123; like: obj.like, on: !obj.on &#125;)&#125;&gt;</span><br><span class="line">            &#123;obj.on ? &quot;ON&quot; : &quot;PFF&quot;&#125;</span><br><span class="line">        &lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-useEffect"><a href="#2-useEffect" class="headerlink" title="- 2. useEffect"></a>- <strong>2. useEffect</strong></h3><p>官网介绍，这个钩子是用来处理组件副作用的。（类似class组件中生命周期函数）</p>
+<p>React将按照effect声明的顺序依次调用组件中的每一个effect。使用Hook可以把组件内相关的副作用组织在一起，而不再把它们拆分到不同的生命周期函数里。</p>
+<p>（1）首先一个无需清除副作用的栗子，例如：网络请求，手动变更DOM，记录日志等；</p>
+<p>class组件实现如下，可以看到在两个周期函数中是完全重复的代码，但这是我们的需求，我们需要在组件挂载完成和更新完成后都执行这个操作：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    document.title &#x3D; &#96;You clicked $&#123;this.state.like&#125; times&#96;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">componentDidUpdate() &#123;</span><br><span class="line">    document.title &#x3D; &#96;You clicked $&#123;this.state.like&#125; times&#96;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>使用useEffect实现如下，这个钩子的第一个参数是一个函数，用来执行相关操作，无论是挂载还是更新，在重新渲染后都会执行useEffect：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子④</span><br><span class="line">const LikeButton: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const [like, setLike] &#x3D; useState(0);</span><br><span class="line">    const [on, setOn] &#x3D; useState(true);</span><br><span class="line">    useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">        document.title &#x3D; &#96;You clicked $&#123;like&#125; times&#96;;</span><br><span class="line">    &#125;);</span><br><span class="line">    return &lt;&gt;</span><br><span class="line">        &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setLike(like + 1)&#125;&gt;&#123;like&#125;&lt;&#x2F;button&gt;</span><br><span class="line">        &lt;button onClick&#x3D;&#123;() &#x3D;&gt; setOn(!on)&#125;&gt;&#123;on ? &quot;ON&quot; : &quot;PFF&quot;&#125;&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）添加监听事件，卸载组件时需要移除监听的栗子：</p>
+<p>class组件实现如下，我们需要在挂载阶段添加监听，将要卸载组件时移除：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">    document.addEventListener(&quot;click&quot;, this.updateMouse)</span><br><span class="line">&#125;</span><br><span class="line">componentWillUnmount() &#123;</span><br><span class="line">    document.removeEventListener(&quot;click&quot;, this.updateMouse)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用useEffect实现如下，只需要在一个useEffect中，第一个参数的函数里执行添加监听，并且return一个函数，这个函数用来执行卸载时的移除：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子⑤</span><br><span class="line">const MouseTracker: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const [positions, setPositions] &#x3D; useState(&#123; x: 0, y: 0 &#125;);</span><br><span class="line">    useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">        const updateMouse &#x3D; (e: MouseEvent) &#x3D;&gt; &#123;</span><br><span class="line">            setPositions(&#123; x: e.clientX, y: e.clientY &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        document.addEventListener(&quot;click&quot;, updateMouse);</span><br><span class="line">        return () &#x3D;&gt; &#123;</span><br><span class="line">            document.removeEventListener(&quot;click&quot;, updateMouse);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return &lt;p&gt;X: &#123;positions.x&#125;,Y: &#123;positions.y&#125;&lt;&#x2F;p&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（3）注意：<strong>useEffect会在每次渲染后都执行</strong>！这就会导致，其他state的更新也执行这个与当前state不相关的副作用。</p>
+<p>这时useEffect的第二个参数就发挥作用了，它是一个数组:</p>
+<ul>
+<li>当设置为空数组时，useEffect只会执行一次（可以用来执行数据请求等操作，控制只加载一次）</li>
+<li>当设置为一个值时，只有这个值改变才会执行当前effect</li>
+<li>也可以设置多个值，这样在每个值改变导致重渲染之后都会执行useEffect</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子⑥</span><br><span class="line">useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">  document.title &#x3D; &#96;You clicked $&#123;count&#125; times&#96;;</span><br><span class="line">&#125;, [count]); &#x2F;&#x2F; 仅在 count 更改时更新</span><br></pre></td></tr></table></figure>
+<h3 id="3-自定义hook"><a href="#3-自定义hook" class="headerlink" title="- 3. 自定义hook"></a>- <strong>3. 自定义hook</strong></h3><p>在必要的时候我们可以把公共的业务逻辑写成一个自定义的Hook，例如调用api获取数据，当加载过程中需要loading状态，加载完成后loading结束。相关代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子⑦</span><br><span class="line">import &#123; useState, useEffect &#125; from &quot;react&quot;;</span><br><span class="line">import axios from &quot;axios&quot;;</span><br><span class="line"></span><br><span class="line">const useURLLoader &#x3D; (url: string, deps: any[] &#x3D; []) &#x3D;&gt; &#123;</span><br><span class="line">    const [data, setData] &#x3D; useState&lt;any&gt;(null);</span><br><span class="line">    const [loading, setLoading] &#x3D; useState(false);</span><br><span class="line">    useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">        setLoading(true);</span><br><span class="line">        axios.get(url).then(result &#x3D;&gt; &#123;</span><br><span class="line">            setData(result.data);</span><br><span class="line">            setLoading(false);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;, deps);</span><br><span class="line">    return [data, loading];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export &#123; useURLLoader &#125;;</span><br></pre></td></tr></table></figure>
+<p>这个自定义的Hook: useURLLoader就可以在任何地方引入调用，传入url和保证钩子执行的依赖后，可以获取到包含加载结果和loading状态的操作。</p>
+<h3 id="4-useContext"><a href="#4-useContext" class="headerlink" title="- 4. useContext"></a>- <strong>4. useContext</strong></h3><p>组件之间共享数据（该数据对于组件树来说是全局的数据）</p>
+<p>以下栗子，父组件中创建一个context，定义主题相关的对象key:value，引用react提供的createContext创建一个组件ThemeContext，这个组件提供属性Provider，将其他组件包裹在provider内，其他组件就可以拿到全局的样式设置。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 栗子⑧</span><br><span class="line">import React from &quot;react&quot;;</span><br><span class="line"></span><br><span class="line">interface IThemeProps &#123;</span><br><span class="line">    [key: string]: &#123; color: string; background: string &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const themes: IThemeProps &#x3D; &#123;</span><br><span class="line">    &quot;light&quot;: &#123;</span><br><span class="line">        color: &quot;#000&quot;,</span><br><span class="line">        background: &quot;#eee&quot;,</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;dark&quot;: &#123;</span><br><span class="line">        color: &quot;#ff&quot;,</span><br><span class="line">        background: &quot;#222&quot;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export const ThemeContext &#x3D; React.createContext(themes.light);</span><br><span class="line"></span><br><span class="line">const App: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    return &lt;ThemeContext.Provider value&#x3D;&#123;themes.light&#125;&gt;</span><br><span class="line">        &lt;button&gt;hello&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;&#x2F;ThemeContext.Provider&gt;;</span><br><span class="line">&#125;</span><br><span class="line">export &#123; App &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在包裹的任意子组件中引用：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import React, &#123; useContext &#125; from &quot;react&quot;;</span><br><span class="line">import &#123; ThemeContext &#125; from &quot;.&#x2F;App&quot;;</span><br><span class="line"></span><br><span class="line">const Page: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const theme &#x3D; useContext(ThemeContext);</span><br><span class="line">    const style &#x3D; &#123;</span><br><span class="line">        background: theme.background,</span><br><span class="line">        color: theme.color</span><br><span class="line">    &#125;;</span><br><span class="line">    return &lt;button style&#x3D;&#123;style&#125;&gt;click&lt;&#x2F;button&gt;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export &#123; Page &#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="使用hook要注意的两个重点："><a href="#使用hook要注意的两个重点：" class="headerlink" title="使用hook要注意的两个重点："></a>使用hook要注意的两个重点：</h3><p>  ● 只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。<br>  ● 只能在 React 的函数组件中调用 Hook。不要在其他 JavaScript 函数中调用。</p>
+<p>还有一些其他的钩子函数这里不逐个介绍，以后用到会继续总结，react钩子函数<a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/hooks-reference.html">官网</a>可查看~</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/06/13/200613-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / 搭配classnames搞样式">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/06/09/200609-1/" data-toggle="tooltip" data-placement="top"
+                           title="study / Jest + TypeScript 配置安装（一）">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-useState"><span class="toc-text">- 1. useState</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-useEffect"><span class="toc-text">- 2. useEffect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89hook"><span class="toc-text">- 3. 自定义hook</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-useContext"><span class="toc-text">- 4. useContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8hook%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%87%8D%E7%82%B9%EF%BC%9A"><span class="toc-text">使用hook要注意的两个重点：</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>

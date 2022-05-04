@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / flex布局｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2020/03/17/200317-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/05/04/OE3BRg.png">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/05/04/OE3BRg.png?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / flex布局</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2020-03-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#css"
+                           title="css">css</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / flex布局
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <table>
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="right">描述</th>
+<th align="center">可选值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">flex-direction</td>
+<td align="right">item排列方向</td>
+<td align="center">row(默认),row-reverse,column,column-reverse</td>
+</tr>
+<tr>
+<td align="left">flex-wrap</td>
+<td align="right">换行显示</td>
+<td align="center">nowrap(默认),wrap,wrap-reverse</td>
+</tr>
+<tr>
+<td align="left">flex-flow</td>
+<td align="right">flex-direction + flex-wrap</td>
+<td align="center">row wrap(默认)</td>
+</tr>
+<tr>
+<td align="left">justify-content</td>
+<td align="right">item在主轴的对齐方式</td>
+<td align="center">flex-start,flex-end,center,space-between,space-around</td>
+</tr>
+<tr>
+<td align="left">align-items</td>
+<td align="right">item在交叉轴的对齐方式</td>
+<td align="center">flex-start,flex-end,center,baseline,stretch</td>
+</tr>
+<tr>
+<td align="left">align-content</td>
+<td align="right">多根轴线对齐方式</td>
+<td align="center">flex-start,flex-end,center,space-between,space-around,stretch</td>
+</tr>
+<tr>
+<td align="left">order</td>
+<td align="right">item的排列顺序</td>
+<td align="center">0(默认)，值越小越靠前</td>
+</tr>
+<tr>
+<td align="left">flex-grow</td>
+<td align="right">多余空间时item的放大比例</td>
+<td align="center">0(默认，有多余空间也不放大)</td>
+</tr>
+<tr>
+<td align="left">flex-shrink</td>
+<td align="right">空间不足时item的缩小比例</td>
+<td align="center">1(默认，空间不足时缩小)</td>
+</tr>
+<tr>
+<td align="left">flex-basic</td>
+<td align="right">item在主轴上占据的空间</td>
+<td align="center">auto(默认)</td>
+</tr>
+<tr>
+<td align="left">flex</td>
+<td align="right">grow,shrink,basis缩写</td>
+<td align="center">0 1 auto(默认)</td>
+</tr>
+<tr>
+<td align="left">align-self</td>
+<td align="right">单个item独特的对齐方式</td>
+<td align="center">同align-items，且可覆盖</td>
+</tr>
+</tbody></table>
+<p><strong>解释flex：1</strong></p>
+<p>flex： flex-grow  +  flex-shrink  +  flex-basic   默认值： 0 1 auto</p>
+<p><strong>1. flex：none，即 0 0 auto</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.item &#123; flex：none &#125;</span><br><span class="line">.item &#123;</span><br><span class="line">        flex-grow: <span class="number">0</span>;</span><br><span class="line">        flex-shrink: <span class="number">0</span>;</span><br><span class="line">        flex-basis: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2. flex：auto，即 1 1 auto</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.item &#123; flex：auto &#125;</span><br><span class="line">.item &#123;</span><br><span class="line">        flex-grow: <span class="number">1</span>;</span><br><span class="line">        flex-shrink: <span class="number">1</span>;</span><br><span class="line">        flex-basis: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3. flex：1（非负数字），即 1（非负数字）  1  0%</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.item &#123; flex：auto &#125;</span><br><span class="line">.item &#123;</span><br><span class="line">        flex-grow: <span class="number">1</span>;</span><br><span class="line">        flex-shrink: <span class="number">1</span>;</span><br><span class="line">        flex-basis: <span class="number">0</span>%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4. flex：0%（ 或 24px），（不是非负数字），即 1  1  0%（24px）</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.item &#123; flex：<span class="number">0</span>%(24px); &#125;</span><br><span class="line">.item &#123;</span><br><span class="line">        flex-grow: <span class="number">1</span>;</span><br><span class="line">        flex-shrink: <span class="number">1</span>;</span><br><span class="line">        flex-basis: <span class="number">0</span>%(24px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>5. flex：2 3（两个非负数字），即 2  3  0%</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.item &#123; flex：<span class="number">2</span> <span class="number">3</span>; &#125;</span><br><span class="line">.item &#123;</span><br><span class="line">        flex-grow: <span class="number">2</span>;</span><br><span class="line">        flex-shrink: <span class="number">3</span>;</span><br><span class="line">        flex-basis: <span class="number">0</span>%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>6. flex：2 24px（一个非负数字，一个百分比或长度），即 2  1  24px</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">.item &#123; flex：<span class="number">2</span> 24px; &#125;</span><br><span class="line">.item &#123;</span><br><span class="line">        flex-grow: <span class="number">2</span>;</span><br><span class="line">        flex-shrink: <span class="number">1</span>;</span><br><span class="line">        flex-basis: 24px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/03/24/200324-1/" data-toggle="tooltip" data-placement="top"
+                           title="essay / 想带你去我的小时候">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/12/25/191225-1/" data-toggle="tooltip" data-placement="top"
+                           title="photo / 西安">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>
