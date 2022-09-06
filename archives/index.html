@@ -166,6 +166,65 @@
 
 
 <div class="post-preview "
+     style="background-image: url('https://s1.ax1x.com/2022/09/06/v76FPS.png')">
+    <a href="/2022/09/01/220901-1/">
+        <h2 class="post-title">
+            study / TS文件引入图片时找不到
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2022-09-01
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                
+如上，在typescript中引入文件时路径地址正确，提示找不到。
+原因：ts会对代码文件做静态检查，非代码文件无法识别。
+解决办法：
+
+在src下创建img.d.ts文件，在文件中声明图片格式：
+
+在tsconfig.json文件中指定编译该文件
+
+
+
+
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('https://s1.ax1x.com/2022/05/04/OEKDkF.jpg')">
+    <a href="/2022/08/30/220830-1/">
+        <h2 class="post-title">
+            study / 浏览器报错：ERR_SSL_PROTOCOL_ERROR
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2022-08-30
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                加载图片地址时后端提供http请求，Chrome打开后报错：
+ERR_SSL_PROTOCOL_ERROR提示SSL协议错误，主要原因是Nginx配置SSL证书的问题。
+https://blog.csdn.net/qq_21460229/article/details/102969528 中有详..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
      style="background-image: url('https://s1.ax1x.com/2020/08/11/aOMVo9.jpg')">
     <a href="/2021/10/23/211023-1/">
         <h2 class="post-title">
@@ -305,57 +364,6 @@
                 首先介绍这个方法如何使用~
 Object.keys() 返回一个由对象属性组成的字符串数组，一个简单的栗子：
 let person &#x3D; &#123;name:&quot;gg&quot;, age:24, sex:&#39;female&#39;&#125;Object.keys(pe..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('https://s1.ax1x.com/2020/08/11/aOMVo9.jpg')">
-    <a href="/2020/11/28/201128-1/">
-        <h2 class="post-title">
-            photo / 迪士尼
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-11-28
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-
-
-
-
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('https://s1.ax1x.com/2020/08/11/aOMVo9.jpg')">
-    <a href="/2020/10/09/201009-1/">
-        <h2 class="post-title">
-            photo / 大连
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-09
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-
             </p>
         </div>
     </a>
