@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="𝙝𝙖𝙫𝙚 𝙖 𝙣𝙞𝙘𝙚 𝙙𝙖𝙮 ᐝ">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Gloria" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        study / useCallback｜Gloria&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://haojen.github.io/2022/10/28/221028-1/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Gloria
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/study/">study</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/share/">share</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="nullhttps://s1.ax1x.com/2022/10/28/x4k2Wj.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://s1.ax1x.com/2022/10/28/x4k2Wj.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>study / useCallback</h1>
+                    
+                    <span class="meta">
+                         作者 GaoGe
+                        <span>
+                          日期 2022-10-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#React Hook"
+                           title="React Hook">React Hook</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            study / useCallback
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <ol>
+<li>class组件中的性能优化</li>
+</ol>
+<ul>
+<li>在调用setState时，无论前后state是否有变化，都会触发重渲染</li>
+<li>父组件重渲染，内部子组件也会自动重渲染</li>
+</ul>
+<p>以上，是class组件中关于性能方面需要优化的两点。通常的解决办法是：</p>
+<ul>
+<li>用immutable进行比较，在不相等的时候调用setState</li>
+<li>子组件PureComponent用<strong>shouldComponentUpdate</strong>判断前后的props和state是否有变化，通过返回false来阻止更新</li>
+</ul>
+<ol start="2">
+<li>函数组件中的useMemo和useCallback</li>
+</ol>
+<p><code>useMemo(() =&gt; &#123;&#125;, [dep]);</code><br><code>useCallback(() =&gt; &#123;&#125;, [dep]);</code></p>
+<p>二者写法相同，都是在初次渲染和依赖改变时执行。且作用都是做缓存以减少计算，进而提高效率。<br>区别在于，useMemo返回缓存的变量，useCallback返回缓存的函数</p>
+<ol start="3">
+<li>何时+如何使用useCallback？</li>
+</ol>
+<p><strong>并不是每个函数都需要使用useCallback！！</strong></p>
+<blockquote>
+<p>每一个被useCallBack的函数都将被加入useCallBack内部的管理队列。而当我们大量使用useCallBack的时候，管理队列中的函数会非常之多，任何一个使用了useCallBack的组件重新渲染的时候都需要去便利useCallBack内部所有被管理的函数找到需要校验依赖是否改变的函数并进行校验。</p>
+<p>在以上这个过程中，寻找指定函数需要性能，校验也需要性能。所以，滥用useCallBack不但不能阻止函数重新构建还会增加“寻找指定函数和校验依赖是否改变”这两个功能，为项目增添不必要的负担。</p>
+</blockquote>
+<p>useCallback本质工作并不是在依赖不变时保证不创建新函数，而是在依赖不变时继续返回旧函数地址（保持地址不变）<br><strong>useCallback无法阻止函数的重新创建！！</strong></p>
+<ul>
+<li><input checked disabled type="checkbox"> 举栗子：</li>
+</ul>
+<p>父组件中包含自身的state，并将一个普通的回调函数传入子组件当中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;* 父组件 *&#x2F;</span><br><span class="line"></span><br><span class="line">import React, &#123; useState &#125; from &#39;react&#39;;</span><br><span class="line">import &#123; Input &#125; from &#39;antd&#39;;</span><br><span class="line"></span><br><span class="line">const Parent: React.FC &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    const [val, setVal] &#x3D; useState&lt;string&gt;(&#39;&#39;);</span><br><span class="line">    </span><br><span class="line">    const handleCallback &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">        console.log(&#39;父组件传递给子组件的回调函数&#39;);</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;Input value&#x3D;&#123;val&#125; onChange&#x3D;&#123;(e) &#x3D;&gt; setVal(e.target.value)&#125; &#x2F;&gt;</span><br><span class="line">            &lt;Child callBack&#x3D;&#123;handleCallback&#125; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Parent;</span><br></pre></td></tr></table></figure>
+
+<p>子组件接收回调函数作为自身的props，每次执行子组件render时输出打印</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;* 子组件 *&#x2F;</span><br><span class="line"></span><br><span class="line">import React from &#39;react&#39;;</span><br><span class="line"></span><br><span class="line">interface IProps &#123;</span><br><span class="line">    callback: () &#x3D;&gt; void</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const Child: React.FC&lt;IProps&gt; &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    console.log(&#39;我被打印了！说明子组件重新构建了&#39;);</span><br><span class="line">    return &lt;div&gt;我是子组件&lt;&#x2F;div&gt;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default Child;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试结果一️：<br>每次修改父组件val值时，可以在控制台中看到子组件都会跟随重渲染。很显然没必要，父组件的state对子组件来说没有任何作用</p>
+<p>尝试将父组件的回调函数用useCallback包裹：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const handleCallback &#x3D; useCallback(() &#x3D;&gt; &#123;</span><br><span class="line">    console.log(&#39;父组件传递给子组件的回调函数&#39;);</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<p>测试结果二️：<br>即使缓存了回调函数，但修改val值时，子组件依然渲染</p>
+<p><img src="/2022/10/28/221028-1/01.png"></p>
+<p>重点来了-&gt;<br>    <strong>React.memo()</strong> ： 通过校验props中的数据(数据的内存地址)是否改变来决定组件是否需要重新渲染</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;* memo包住子组件 *&#x2F;</span><br><span class="line"></span><br><span class="line">import React from &#39;react&#39;;</span><br><span class="line"></span><br><span class="line">interface IProps &#123;</span><br><span class="line">    callback: () &#x3D;&gt; void</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const Child: React.FC&lt;IProps&gt; &#x3D; React.memo(() &#x3D;&gt; &#123;</span><br><span class="line">    console.log(&#39;我被打印了就说明子组件重新构建了&#39;);</span><br><span class="line">    return &lt;div&gt;我是子组件&lt;&#x2F;div&gt;</span><br><span class="line">&#125;);</span><br><span class="line">export default Child;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试结果三️：<br>无论如何修改父组件的state都不会再影响子组件，子组件不会再进行没必要的重渲染，完成性能上的优化</p>
+<p><img src="/2022/10/28/221028-1/02.png"></p>
+<p>结论： 用useCallBack包裹传入子组件的回调函数，以保证父组件state更新时，回调函数的返回地址不变，依然是缓存的函数地址。而子组件通过memo函数包裹后，会对传入的props进行校验，传入的函数栈地址不变，所以不渲染。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/10/04/221004-1/" data-toggle="tooltip" data-placement="top"
+                           title="photo / 安徽黄山">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/pigeon1021">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/GaoGe21">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Gloria 2022
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://haojen.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="https://s3.ax1x.com/2021/01/17/ss45lQ.jpg">
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":150},"mobile":{"show":true}});</script></body>
+
+</html>
